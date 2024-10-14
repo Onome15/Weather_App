@@ -76,9 +76,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[400],
+      backgroundColor: Colors.deepPurple[400],
       appBar: AppBar(
-        title: Text('Weather App'),
+        title: const Text('Weather App'),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -88,27 +88,30 @@ class _HomePageState extends State<HomePage> {
               children: [
                 TextField(
                   controller: _cityController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.white),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white)),
                     constraints: BoxConstraints(maxWidth: 350),
                     labelText: 'Enter City Name',
-                    border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: _fetchWeather,
-                  child: Text(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        WidgetStateProperty.all(Colors.deepPurpleAccent[200]),
+                  ),
+                  child: const Text(
                     'Get Weather',
                     style: TextStyle(
                       color: Colors.white,
                     ),
                   ),
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Colors.blue),
-                  ),
                 ),
-                SizedBox(height: 16),
-                if (_isLoading) CircularProgressIndicator(),
+                const SizedBox(height: 16),
+                if (_isLoading) const CircularProgressIndicator(),
                 if (_weather != null)
                   Column(
                     children: [
@@ -117,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             _weather!.cityName,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold),
@@ -129,20 +132,20 @@ class _HomePageState extends State<HomePage> {
                           )
                         ],
                       ),
-                      SizedBox(height: 10),
-                      Text(getCurrentTime(),
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                          )),
+                      const SizedBox(height: 10),
                       Text(
                         getCurrentDate(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 15,
                           color: Colors.white,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      Text(getCurrentTime(),
+                          style: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                          )),
+                      const SizedBox(height: 10),
                       Lottie.asset(weatherAnimation(_weather!.weather),
                           height: 150),
                       Row(
@@ -151,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             '${_weather!.weather},',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -162,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Text(
                             '${_weather!.description}.',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 18,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -170,25 +173,25 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Text(
                         '${_weather!.temperature}°C',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 40,
                           color: Colors.white,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            color: Colors.blue,
+                            color: Colors.deepPurpleAccent[200],
                             borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
-                        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                                const BorderRadius.all(Radius.circular(10.0))),
+                        padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
                         height: 150,
                         width: 300,
                         child: Column(
@@ -199,48 +202,40 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Column(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.wind_power,
                                       color: Colors.amber,
                                       size: 15,
                                     ),
-                                    Text(
-                                      '${_weather!.minTemperature}°C',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    const Text(
-                                      'minTemp',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                      ),
-                                    )
+                                    weatherDetails(
+                                        title: 'minTemp',
+                                        value: '${_weather!.minTemperature}°C'),
                                   ],
                                 ),
                                 Column(
                                   children: [
-                                    Icon(
+                                    const Icon(
+                                      Icons.airline_stops,
+                                      size: 15,
+                                      color: Colors.amber,
+                                    ),
+                                    weatherDetails(
+                                        title: 'FeelsLike',
+                                        value: '${_weather!.feelsLike}°C'),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    const Icon(
                                       Icons.sunny,
                                       size: 15,
                                       color: Colors.amber,
                                     ),
-                                    Text(
-                                      '${_weather!.maxTemperature}°C',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    const Text(
-                                      'maxTemp',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                      ),
-                                    )
+                                    weatherDetails(
+                                        title: 'maxTemp',
+                                        value: '${_weather!.maxTemperature}°C'),
                                   ],
-                                )
+                                ),
                               ],
                             ),
                             const Divider(),
@@ -249,46 +244,38 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Column(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.air,
                                       color: Colors.amber,
                                       size: 15,
                                     ),
-                                    Text(
-                                      '${_weather!.pressure}Hg',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    const Text(
-                                      'Pressure',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                    weatherDetails(
+                                        title: 'Pressure',
+                                        value: '${_weather!.pressure}hpA'),
                                   ],
                                 ),
                                 Column(
                                   children: [
-                                    Icon(
+                                    const Icon(
+                                      Icons.wind_power_sharp,
+                                      color: Colors.amber,
+                                      size: 15,
+                                    ),
+                                    weatherDetails(
+                                        title: 'Wind',
+                                        value: '${_weather!.wind}m/s'),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    const Icon(
                                       Icons.water_drop,
                                       color: Colors.amber,
                                       size: 15,
                                     ),
-                                    Text(
-                                      '${_weather!.humidity}%',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    const Text(
-                                      'humidity',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                    weatherDetails(
+                                        title: 'Humidity',
+                                        value: '${_weather!.humidity}%'),
                                   ],
                                 )
                               ],
@@ -303,6 +290,26 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+    );
+  }
+
+  Column weatherDetails({required String title, required String value}) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 12,
+            color: Colors.white,
+          ),
+        )
+      ],
     );
   }
 }
