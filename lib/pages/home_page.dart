@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[50],
+      backgroundColor: Colors.lightBlue[400],
       appBar: AppBar(
         title: Text('Weather App'),
       ),
@@ -97,7 +97,15 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: _fetchWeather,
-                  child: Text('Get Weather'),
+                  child: Text(
+                    'Get Weather',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(Colors.blue),
+                  ),
                 ),
                 SizedBox(height: 16),
                 if (_isLoading) CircularProgressIndicator(),
@@ -110,38 +118,67 @@ class _HomePageState extends State<HomePage> {
                           Text(
                             _weather!.cityName,
                             style: TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold),
                           ),
-                          const Icon(Icons.location_on)
+                          const Icon(
+                            Icons.location_on,
+                            color: Colors.amber,
+                            size: 20,
+                          )
                         ],
                       ),
                       SizedBox(height: 10),
                       Text(getCurrentTime(),
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 15,
+                            color: Colors.white,
                           )),
-                      Text(getCurrentDate()),
+                      Text(
+                        getCurrentDate(),
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
+                      ),
                       SizedBox(height: 10),
                       Lottie.asset(weatherAnimation(_weather!.weather),
                           height: 150),
-                      Text(
-                        '${_weather!.weather},',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        _weather!.description,
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.italic),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            '${_weather!.weather},',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '${_weather!.description}.',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic),
+                          ),
+                        ],
                       ),
                       SizedBox(
                         height: 10,
                       ),
                       Text(
                         '${_weather!.temperature}°C',
-                        style: TextStyle(fontSize: 30),
+                        style: TextStyle(
+                          fontSize: 40,
+                          color: Colors.white,
+                        ),
                       ),
                       SizedBox(
                         height: 10,
@@ -153,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                                 BorderRadius.all(Radius.circular(10.0))),
                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                         height: 150,
-                        width: 250,
+                        width: 300,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -164,13 +201,21 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Icon(
                                       Icons.wind_power,
-                                      color: Colors.cyan[100],
+                                      color: Colors.amber,
                                       size: 15,
                                     ),
-                                    Text('${_weather!.minTemperature}°C'),
+                                    Text(
+                                      '${_weather!.minTemperature}°C',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                     const Text(
                                       'minTemp',
-                                      style: TextStyle(fontSize: 12),
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                      ),
                                     )
                                   ],
                                 ),
@@ -179,12 +224,20 @@ class _HomePageState extends State<HomePage> {
                                     Icon(
                                       Icons.sunny,
                                       size: 15,
-                                      color: Colors.cyan[100],
+                                      color: Colors.amber,
                                     ),
-                                    Text('${_weather!.maxTemperature}°C'),
+                                    Text(
+                                      '${_weather!.maxTemperature}°C',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                     const Text(
                                       'maxTemp',
-                                      style: TextStyle(fontSize: 12),
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                      ),
                                     )
                                   ],
                                 )
@@ -198,13 +251,21 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Icon(
                                       Icons.air,
-                                      color: Colors.cyan[100],
+                                      color: Colors.amber,
                                       size: 15,
                                     ),
-                                    Text('${_weather!.pressure}Hg'),
+                                    Text(
+                                      '${_weather!.pressure}Hg',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                     const Text(
                                       'Pressure',
-                                      style: TextStyle(fontSize: 12),
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -212,13 +273,21 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Icon(
                                       Icons.water_drop,
-                                      color: Colors.cyan[100],
+                                      color: Colors.amber,
                                       size: 15,
                                     ),
-                                    Text('${_weather!.humidity}%'),
+                                    Text(
+                                      '${_weather!.humidity}%',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                     const Text(
                                       'humidity',
-                                      style: TextStyle(fontSize: 12),
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ],
                                 )
