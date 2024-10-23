@@ -5,8 +5,8 @@ class Weather {
   final double minTemperature;
   final double maxTemperature;
   final String description;
-  final double pressure;
-  final double humidity;
+  final int pressure;
+  final int humidity;
   final String weather;
   final double wind;
 
